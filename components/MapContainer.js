@@ -45,7 +45,7 @@ export default function MapContainer({ location, setCoord, setIsLocation }) {
             <div ref={mapContainer} className="w-full h-3/4 p-5 border border-black"></div>
             <div className=" flex w-3/4 mx-auto">
                 <div className="w-1/2">
-                    <p className="text-black text-sm">{currentAddress}</p>
+                    <p className="text-black text-xs my-auto text-center">{currentAddress}</p>
                 </div>
                 <button className="block mx-auto border border-black text-black p-3 rounded text-sm h-full hover:ring ring-[#02F3B0] ring-inset"
                     onClick={() => setEntered(true)}

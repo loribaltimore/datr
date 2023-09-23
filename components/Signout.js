@@ -25,3 +25,8 @@ export default function Signout(){
     </div>
     )
 };
+
+
+//want to use Next Image componenet
+//add loading bar and flash?
+//seed more users
