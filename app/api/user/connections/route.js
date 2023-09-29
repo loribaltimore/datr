@@ -106,6 +106,7 @@ export async function POST(request) {
   await User.interestAndPass(currentUserId, interested ? 'interested' : 'pass');
     await currentUser.save();
   await connection.save();
+  
   let updatedLikedBy = await currentUser.populate('connections.pending')
     .then(data => { return data.connections.pending }).catch(err => console.log(err));
   // const allPhotos = updatedLikedBy.map((element, index) => {

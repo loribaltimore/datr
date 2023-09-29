@@ -10,10 +10,11 @@ async function getData() {
   await database();
   const session = await getServerSession(authOptions);
   const currentUser = await User.findById(session.userId.toString());
-  const allMingles = await sortFunction(currentUser._id)
-    .then(data => {
-      return data
-    }).catch(err => console.log(err));
+  // const allMingles = await sortFunction(currentUser._id)
+  //   .then(data => {
+  //     return data
+  //   }).catch(err => console.log(err));
+  const allMingles = await User.find({}).then(data => { return data }).catch(err => console.log(err));
  return {allMingles, currentUser}
 }
 
