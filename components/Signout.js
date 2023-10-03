@@ -2,9 +2,22 @@
 import { signOut } from "next-auth/react";
 import { useContext } from 'react';
 import { ReviewContext } from 'components/ReviewContext';
+import { useSession } from 'next-auth/react';
 
 export default function Signout(){
-       const {setIsLoading} = useContext(ReviewContext);
+    const { setIsLoading } = useContext(ReviewContext);
+    const { data: session } = useSession();
+    
+    const handleClick = async () => { 
+        if (session.userId.toString() === '651c55cc39da08792ffa69b6') {
+            await fetch('api/demoize', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(data => data).catch(err => console.log(err));
+        }
+    };
     return (
         <div className="w-3/4 bg-white border border-black text-black rounded m-36 py-24 space-y-10 block">
             <div className="font-extralight">
@@ -12,7 +25,8 @@ export default function Signout(){
             </div>
             <button className="block mx-auto text-black border border-black w-2/3 rounded p-3"
             onClick={() => {
-                    setIsLoading(true);
+                setIsLoading(true);
+                handleClick();
                     try {
                         signOut()
                     } catch {

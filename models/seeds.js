@@ -9,6 +9,7 @@ const userSorting = require('../lib/userSorting');
 const fs = require('fs');
 const { GridFSBucket } = require('mongodb');
 const { sortFunction } = require('../lib/userSorting');
+const distanceCrawl = require('../lib/distanceCrawl');
 
 const zodiacSigns = [
     "Aries",
@@ -33,11 +34,11 @@ const sortingCheck = async () => {
 
 const seedUser = async () => {
     const client = await database();
-
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < 1000; i++){
+        // console.log(i);
         const randHobby = Math.floor(Math.random() * (hobbies.length / 2));
         const randAge = Math.floor(Math.random() * 30);
-        const randCoord = Math.floor(Math.random() * coords.length -1);
+        const randGenderId = Math.floor(Math.random() * 3);
         const randPhoto = Math.floor(Math.random() * 23 + 1);
        const currentUser = await new User({
         username: casual.username,
@@ -47,15 +48,15 @@ const seedUser = async () => {
            hobbies: hobbies.slice(randHobby, randHobby + 6),
             location: {
                 geo: {
-                coordinates: coords[randCoord] || [-122.257935, 47.784021]
+                    coordinates: distanceCrawl(i)
         }
            },
             preferences: {
         range: Math.floor(Math.random() * 20),
-        gender: randAge % 2 === 0 ? 'female' : 'male',
+        gender: ['male', 'female', 'non-binary', 'other'][randGenderId],
         age: randAge + 18
     },
-        genderId: randAge % 2 === 0 ? 'female' : 'male',
+        genderId: ['male', 'female', 'non-binary', 'other'][randGenderId],
         age: randAge + 18
        })
         fs.readFile(randAge % 2 === 0 ? `../public/Women Photos Datr/${randPhoto}.jpg` : `../public/Men Photos Datr/${randPhoto}.jpg`, (err, data) => {
@@ -163,7 +164,7 @@ console.log("THEM TRIVIA SEEDED")
 
 const seedConnections = async () => {
     await database();
-    const currentUser = await User.findOne({ username: 'Powerman5000' }).then(data => { return data} ).catch(err => console.log(err));
+    const currentUser = await User.findOne({ username: 'SuperJenny' }).then(data => { return data} ).catch(err => console.log(err));
     const users = await User.find({})
         .then(data => { return data }).catch(err => console.log(err));
     currentUser.connections.reciprocated = [];
@@ -179,7 +180,7 @@ const seedConnections = async () => {
     currentUser.interestAndPass.pass.count = 0;
     currentUser.rating.looks.metricsByAge.set(currentUser.age.toString(), { total: 5, count: 1 });
         await currentUser.save();
-    for (let i = 1; i < 498; i++) {
+    for (let i = 1; i < 145; i++) {
         users[i].rating.looks.avg = Math.floor(Math.random() * 7 + 3);
         
         const rand = Math.floor(Math.random() * 2);
@@ -194,10 +195,26 @@ const seedConnections = async () => {
         users[i].rating.looks.total = users[i].rating.looks.avg * 5;
         await users[i].save();
         if (currentUser._id !== users[i]._id) {
-            if (i % 2 === 0 && i % 3 !== 0) {
+            if (currentUser.connections.matched.length < 6 && i % 2 === 0) {
                 currentUser.connections.matched.push(users[i]._id);
 
-            } else if (i % 2 === 0 && i % 3 === 0 && i % 5 !== 0) { 
+                const newConnection = await new Connection({
+            connection1:{name: currentUser.name, id: currentUser._id, photo: currentUser.photos},
+             connection2: { name: users[i].name, id: users[i]._id, photo: users[i].photos},
+             compatibility: {
+                openness: 10 - Math.abs(Math.round(currentUser.personality['openness'] - users[i].personality['openness'])),
+        conscientiousness: 10 - Math.abs(Math.round(currentUser.personality['conscientiousness'] - users[i].personality['conscientiousness'])),
+        extraversion: 10 - Math.abs(Math.round(currentUser.personality['extraversion'] - users[i].personality['extraversion'])),
+        agreeableness: 10 - Math.abs(Math.round(currentUser.personality['agreeableness'] - users[i].personality['agreeableness'])),
+        neuroticism: 10 - Math.abs(Math.round(currentUser.personality['neuroticism'] - users[i].personality['neuroticism']))
+                    },
+           }).save();
+                currentUser.connections.reciprocated.push(newConnection.id);
+                users[i].connections.reciprocated.push(newConnection.id);
+                users[i].notifications.chat.push({from: currentUser.name});
+                currentUser.notifications.chat.push({from: currentUser.name});
+                await users[i].save();
+            } else if (currentUser.connections.pending.length < 13 && i % 2 === 0 && i % 3 === 0 && i % 5 !== 0) { 
                 currentUser.connections.pending.push(users[i]._id);
             } else {
                 currentUser.connections.rejectedBy.push(users[i]._id);
@@ -239,11 +256,10 @@ const seedConnections = async () => {
             console.log(currentUser.rating.looks.count);
             // console.log(currentUser.rating.looks.avg + choices[rand2 <= 25 ? '0' : rand2 > 50 ? '1' : '2']);
             currentUser.rating.looks.avg = Math.floor(currentUser.rating.looks.total / currentUser.rating.looks.count);
-            currentUser.rating.looks.metricsByAge.get(users[i].age.toString()) ?
-                currentUser.rating.looks.metricsByAge.set(users[i].age.toString(), {total: currentUser.rating.looks.metricsByAge.get(users[i].age.toString()).total  + Math.floor(currentUser.rating.looks.avg) + choices[rand2 <= 25 ? '0' : rand2 > 50 ? '1' : '2'], count: currentUser.rating.looks.metricsByAge.get(users[i].age.toString()).count + 1 })
-                : currentUser.rating.looks.metricsByAge.set(users[i].age.toString(), {total: currentUser.rating.looks.avg + choices[rand2 <= 25 ? '0' : rand2 > 50 ? '1' : '2'], count: 1});
+            currentUser.rating.looks.metricsByAge.get(users[i].age ? users[i].age.toString() : '29') ?
+                currentUser.rating.looks.metricsByAge.set(users[i].age ? users[i].age.toString() : '29', {total: currentUser.rating.looks.metricsByAge.get(users[i].age ? users[i].age.toString() : '29').total  + Math.floor(currentUser.rating.looks.avg) + choices[rand2 <= 25 ? '0' : rand2 > 50 ? '1' : '2'], count: currentUser.rating.looks.metricsByAge.get(users[i].age ? users[i].age.toString() : '29').count + 1 })
+                : currentUser.rating.looks.metricsByAge.set(users[i].age ? users[i].age.toString() : '29', {total: currentUser.rating.looks.avg + choices[rand2 <= 25 ? '0' : rand2 > 50 ? '1' : '2'], count: 1});
                    await currentUser.save();
-
         }
 
     };
@@ -359,9 +375,77 @@ const populatePending = async () => {
     // const test = await User.findById("64f0a36ed5d85f1e060c516f");
     // console.log(test);
    
-    const currentUser = await User.findOne({ username: 'Powerman5000' });
-    currentUser.connections.reciprocated = [];
-    await currentUser.save();
+    // const allConnections = await Connection.find({});
+    // for (let i = 0; i < allConnections.length; i++){
+    //     console.log(allConnections[i].conversation.length);
+    //     allConnections[i].conversation = [
+    //                     {
+    //                         text: "Hello! 😊",
+    //                         sender: allConnections[i].connection1.id,
+    //                         receiver: allConnections[i].connection2.id,
+    //                         date: new Date(),
+    //                         connection: allConnections[i]._id
+    //                     },
+    //                     {
+    //                         text:   "Hi there! How's your day going?",
+    //                         sender: allConnections[i].connection2.id,
+    //                         receiver: allConnections[i].connection1.id,
+    //                         date: new Date(),
+    //                         connection: allConnections[i]._id
+    //                     },
+    //                     {
+    //                         text:  "Pretty good, thanks for asking! I was just checking out your profile. You seem really interesting. Do you enjoy hiking?",
+    //                         sender: allConnections[i].connection1.id,
+    //                         receiver: allConnections[i].connection2.id,
+    //                         date: new Date(),
+    //                         connection: allConnections[i]._id
+    //                     },
+    //                     {
+    //                         text:   "Thanks! Yes, I absolutely love hiking. It's one of my favorite activities. Did you see the pictures from my last hike in my profile?",
+    //                         sender: allConnections[i].connection2.id,
+    //                         receiver: allConnections[i].connection1.id,
+    //                         date: new Date(),
+    //                         connection: allConnections[i]._id
+    //                     },
+    //                     {
+    //                         text: "Yes, the scenery looked amazing! I'd love to visit that place sometime. By the way, do you have any other hobbies?",
+    //                         sender: allConnections[i].connection1.id,
+    //                         receiver: allConnections[i].connection2.id,
+    //                         date: new Date(),
+    //                         connection: allConnections[i]._id
+    //                     },
+    //                     {
+    //                         text:  "I do! Besides hiking, I enjoy reading, playing the guitar, and traveling. How about you? Tell me more about yourself!",
+    //                         sender: allConnections[i].connection2.id,
+    //                         receiver: allConnections[i].connection1.id,
+    //                         date: new Date(),
+    //                         connection: allConnections[i]._id
+    //                     }
+    //     ];
+    //     await allConnections[i].save();
+    // }
+    const jenny = await User.findOne({ username: 'SuperJenny' });
+    const demoUser = await new User({
+        username: 'demoUser',
+        name: jenny.name,
+        description: jenny.description,
+        age: jenny.age,
+        description: jenny.description,
+        sign: jenny.sign,
+        hobbies: jenny.hobbies,
+        location: jenny.location,
+        personality: jenny.personality,
+        rating: jenny.rating,
+        photos: jenny.photos,
+        genderId: jenny.genderId,
+        preferences: jenny.preferences,
+        connections: jenny.connections,
+        membership: jenny.membership,
+        notifications: jenny.notifications,
+        interestAndPass: jenny.interestAndPass,
+        reviews: jenny.reviews
+    }).save();
+    console.log(demoUser);
     // currentUser.membership.membershipType = 'basic';
     // await currentUser.save();
     // console.log(currentUser.interestAndPass);
@@ -442,10 +526,10 @@ const seedMetricChanges = async () => {
 };
 
 // seedMetricChanges();
-populatePending();
+// populatePending();
 // sortingCheck();
 // seedUser();
-// seedConnections();
+seedConnections();
 // seedSocketUser();
 // showResource();
 // seedLoc();

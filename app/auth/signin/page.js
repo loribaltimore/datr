@@ -3,7 +3,7 @@ import SigninBtn from 'components/SigninBtn';
 
 export default async function Signin(props) {
     const providers = await getProviders()
-        .then(data => { console.log(data); console.log('FROM PROVIDERS'); return data })
+        .then(data => { return data })
         .catch(err => console.log(err));
     return (
         <div className="block mx-auto w-3/4 bg-white border border-black text-black rounded mt-36 py-24 space-y-10 block">
@@ -14,8 +14,12 @@ export default async function Signin(props) {
                 Object.values(providers).map((provider, index) => (
                  <SigninBtn providerId={provider.id} providerName={provider.name} key={provider.name} />
             ))
-      }
+            }
+            <div className="font-extralight text-center">
+                <p className="text-2xl">Demo credentials:</p>
+                <p>email: datr.demo@gmail.com</p>
+                <p>password: datrdemo123</p>
+            </div>
     </div>
-        
     )
 };

@@ -8,6 +8,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../api/auth/[...nextauth]/route';
 
 async function getData() {
+
   await database();
   const session = await getServerSession(authOptions);
   const { userId } = session;

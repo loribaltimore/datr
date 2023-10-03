@@ -1,5 +1,5 @@
 import NextAuth from "next-auth"
-import {MongoDBAdapter} from "@next-auth/mongodb-adapter"
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from 'models/clientPromise';
 import GoogleProvider from "next-auth/providers/google";
 import database from 'models/database';
@@ -18,8 +18,8 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackUrl: url
     }),
-
   ],
+
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       return true
