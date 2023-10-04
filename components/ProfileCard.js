@@ -14,7 +14,7 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
   const canVoteNegative = currentUserFormatted.rating.looks.count % 10 === 0; 
   const flooredRating = Math.round(rating.looks.total / rating.looks.count);
   const pathname = usePathname();
-  console.log(!/chat/ig.test(pathname))
+
     return (
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
         <div className="space-y-16 sm:col-span-4 lg:col-span-5">
@@ -42,7 +42,6 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
             <div className='w-1/2'>
               <h2 className="text-black text-5xl font-extralight">{name}</h2>
               <section aria-labelledby="information-heading" className="mt-4">
-                <h3 id="information-heading" className="sr-only">Product information</h3>
                 <div className="flex items-center">
                 <p className="text-lg text-gray-900 sm:text-xl">{age}</p>
                   <div className="ml-4 border-l border-gray-300 pl-4">

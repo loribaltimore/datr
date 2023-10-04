@@ -44,7 +44,7 @@ export default function AllProfiles({ allMingles, setAllLikedBy, currentUser, is
     };
 
     return (
-        <div className="border border-black m-auto mt-28 items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded w-3/4">
+        <div className="border border-black m-auto mt-28 items-center overflow-hidden bg-white px-4 pb-8 pt-14 drop-shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded w-3/4">
             {
                 connection ?
                     <QuizResults

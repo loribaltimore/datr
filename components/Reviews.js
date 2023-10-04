@@ -10,7 +10,7 @@ export default function Reviews({ connection }) {
   const [updatedReviews, setUpdatedReviews] = useState([]);
     const formattedConnection = connection && typeof connection === 'object'? connection : JSON.parse(connection);
   const flooredRating = Math.round(formattedConnection.rating.date.total / formattedConnection.rating.date.count);
-  
+
   return <div className=''>
             <div className='w-100 flex mb-10'>
                 <div className='w-full flex space-x-4'>
@@ -36,11 +36,15 @@ export default function Reviews({ connection }) {
                 </div>
             </div>
             <ReviewPanel connection={typeof connection == 'object' ? JSON.stringify(connection) : connection} updatedReviews={updatedReviews} />
-          <div className='mt-16'>
-                <ReviewInput connection={connection}
+    <div className='mt-16'>
+      {
+        currentMongoConnection ?
+          <ReviewInput connection={connection}
                     setUpdatedReviews={setUpdatedReviews}
                     currentMongoConnection={JSON.stringify(currentMongoConnection)}
-            />
+            /> : null
+      }
+                
              <button className='hover:ring ring-[#F3D202] ring-inset  block mx-auto text-black border border-black py-3 px-5 rounded'
                     onClick={() => {setShowReviews(false)}}
                 >back</button>

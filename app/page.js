@@ -5,6 +5,8 @@ import {  XMarkIcon } from '@heroicons/react/24/outline'
 import {ChartBarSquareIcon, HandThumbUpIcon, PencilSquareIcon, CreditCardIcon} from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import logo from '../public/logo.png';
+import { signIn } from "next-auth/react";
+
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
@@ -123,7 +125,7 @@ export default function Page() {
             }}
           />
               </div>
-              <div className='border text-black w-1/2 mx-auto p-5 font-extralight text-center rounded'>
+              <div className='border text-black drop-shadow-2xl bg-white bg-opacity-30 w-1/2 mx-auto p-5 font-extralight text-center rounded'>
                   For a demo, please use  Log In button above
                </div>
               <div className="mx-auto max-w-2xl  py-32 sm:py-48 lg:py-32">
@@ -147,14 +149,13 @@ export default function Page() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="#"
-                className="rounded-md bg-[#02F3B0] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#02F3B0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#02F3B0]"
-              >
+                              href="#"
+                              className="rounded-md bg-[#02F3B0] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#02F3B0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#02F3B0]"
+                              onClick={() => signIn('google', 'Google')}
+                          >
                 Get started
               </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+             
             </div>
           </div>
         </div>
