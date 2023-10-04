@@ -46,7 +46,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-hidden  bg-gradient-to-tr from-[#33FFD1] to-[#FF33E7]` } style={{backgroundColor: 'gray'}}>
+      <body className={`${inter.className} overflow-hidden h-screen bg-gradient-to-tr from-[#33FFD1] to-[#FF33E7]` } style={{backgroundColor: 'gray'}}>
         <NextAuthProvider session={session}>
           <RegistrationProvider>
             <ReviewProvider>
