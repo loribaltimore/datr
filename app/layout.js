@@ -9,6 +9,7 @@ import Flash from 'components/Flash';
 import { ReviewProvider } from 'components/ReviewContext';
 import { RegistrationProvider } from 'components/RegistrationContext';
 import { NotifProvider } from 'components/NotifContext';
+import Footer from 'components/Footer';
 
 import User from 'models/userSchema';
 export const metadata = {
@@ -45,7 +46,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-hidden` } style={{backgroundColor: 'gray'}}>
+      <body className={`${inter.className} overflow-hidden  bg-gradient-to-tr from-[#33FFD1] to-[#FF33E7]` } style={{backgroundColor: 'gray'}}>
         <NextAuthProvider session={session}>
           <RegistrationProvider>
             <ReviewProvider>
@@ -55,12 +56,17 @@ export default async function RootLayout({ children }) {
              session && session.flash && session.flash.message ?
               <Flash flash={session.flash} /> : null
             }
-            {children}
-              </Nav>
+                  {children}
+                </Nav>
+                {
+                  !session ?
+                  <Footer /> : null
+                }
               </NotifProvider>
             </ReviewProvider>
             </RegistrationProvider>
-          </NextAuthProvider>
+        </NextAuthProvider>
+        
       </body>
     </html>
   )
