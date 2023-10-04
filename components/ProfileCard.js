@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import Rater from 'components/Rater';
 import { ReviewContext } from 'components/ReviewContext';
 import Upgrade from 'components/Upgrade';
+import { usePathname } from 'next/navigation';
 
 export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, currentUser, distance,
   setConnection, isBank, isRev, setCompatibility, isCurrentUser }) {
@@ -12,6 +13,8 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
   const currentUserFormatted = JSON.parse(currentUser);
   const canVoteNegative = currentUserFormatted.rating.looks.count % 10 === 0; 
   const flooredRating = Math.round(rating.looks.total / rating.looks.count);
+  const pathname = usePathname();
+  console.log(!/chat/ig.test(pathname))
     return (
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
         <div className="space-y-16 sm:col-span-4 lg:col-span-5">
@@ -101,7 +104,7 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
             </div>
             <section aria-labelledby="options-heading" className="mt-6 border-t border-t-black">
               {
-                ( !isCurrentUser) ?
+                (!isCurrentUser && !/chat/ig.test(pathname)) ?
                   <Rater
                     rating={rating.looks.total / rating.looks.count}
                     canVoteNegative={canVoteNegative}
