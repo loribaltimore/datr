@@ -22,6 +22,7 @@ export const authOptions = {
 
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      // console.log(user)
       return true
     },
     async redirect({ url, baseUrl }) {
@@ -38,6 +39,7 @@ export const authOptions = {
         session.flash = newSession.flash;
        await session.save();
       };
+      // console.log(session);
       return  session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {

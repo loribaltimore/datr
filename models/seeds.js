@@ -34,7 +34,8 @@ const sortingCheck = async () => {
 
 const seedUser = async () => {
     const client = await database();
-    for (let i = 0; i < 1000; i++){
+    await User.deleteMany({ name: { $ne: 'Jenny' }, username: { $ne: 'Powerman5000' } });
+    for (let i = 0; i < 200; i++){
         // console.log(i);
         const randHobby = Math.floor(Math.random() * (hobbies.length / 2));
         const randAge = Math.floor(Math.random() * 30);
@@ -66,15 +67,15 @@ const seedUser = async () => {
             const buffer = Buffer.from(data);
             const db = client.useDb('myFirstDatabase');
             const bucket = new GridFSBucket(db);
-            console.log(buffer);
+            // console.log(buffer);
             const filename = casual.word + '.jpg';
             const uploadStream = bucket.openUploadStream(filename,  {contentType:'image/jpg'});
             uploadStream.write(buffer);
             uploadStream.on('close', async function (file) {
                 currentUser.photos.push(uploadStream.id.toString());
-                if (currentUser.photos.length === 1) {
-                    await currentUser.save();
-                }
+                // if (currentUser.photos.length === 1) {
+                //     await currentUser.save();
+                // }
             });
             uploadStream.end();
             uploadStream.on('finish', function () {
@@ -164,7 +165,8 @@ console.log("THEM TRIVIA SEEDED")
 
 const seedConnections = async () => {
     await database();
-    const currentUser = await User.findOne({ username: 'SuperJenny' }).then(data => { return data} ).catch(err => console.log(err));
+    console.log('WOrking')
+    const currentUser = await User.findOne({ name: 'Jenny' }).then(data => { return data} ).catch(err => console.log(err));
     const users = await User.find({})
         .then(data => { return data }).catch(err => console.log(err));
     currentUser.connections.reciprocated = [];
@@ -425,27 +427,7 @@ const populatePending = async () => {
     //     await allConnections[i].save();
     // }
     const jenny = await User.findOne({ username: 'SuperJenny' });
-    const demoUser = await new User({
-        username: 'demoUser',
-        name: jenny.name,
-        description: jenny.description,
-        age: jenny.age,
-        description: jenny.description,
-        sign: jenny.sign,
-        hobbies: jenny.hobbies,
-        location: jenny.location,
-        personality: jenny.personality,
-        rating: jenny.rating,
-        photos: jenny.photos,
-        genderId: jenny.genderId,
-        preferences: jenny.preferences,
-        connections: jenny.connections,
-        membership: jenny.membership,
-        notifications: jenny.notifications,
-        interestAndPass: jenny.interestAndPass,
-        reviews: jenny.reviews
-    }).save();
-    console.log(demoUser);
+    console.log(jenny.interestAndPass.byTotal);
     // currentUser.membership.membershipType = 'basic';
     // await currentUser.save();
     // console.log(currentUser.interestAndPass);
@@ -526,10 +508,10 @@ const seedMetricChanges = async () => {
 };
 
 // seedMetricChanges();
-// populatePending();
+populatePending();
 // sortingCheck();
 // seedUser();
-seedConnections();
+// seedConnections();
 // seedSocketUser();
 // showResource();
 // seedLoc();

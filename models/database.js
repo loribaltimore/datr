@@ -5,7 +5,7 @@ module.exports = async () => {
   //Connecting to DB with Mongoose, because it is more straightforward than MongoClient
   if (!mongoose.connections[0].readyState) {
  await mongoose.connect(connectionUrl, { useNewUrlParser: true })
-   .then(data => { client = data.connections[0];}).catch(err => console.log(err))
+   .then(data => {  client = data.connections[0];}).catch(err => console.log(err))
   } else {
     client = mongoose.connections[0];
   };

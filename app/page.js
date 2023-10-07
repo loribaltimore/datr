@@ -125,7 +125,7 @@ export default function Page() {
             }}
           />
               </div>
-              <div className='border text-black drop-shadow-2xl bg-white bg-opacity-30 w-1/2 mx-auto p-5 font-extralight text-center rounded'>
+              <div className='border text-black shadow-xl bg-white bg-opacity-30 w-1/2 mx-auto p-5 font-extralight text-center rounded'>
                   For a demo, please use  Log In button above
                </div>
               <div className="mx-auto max-w-2xl  py-32 sm:py-48 lg:py-32">

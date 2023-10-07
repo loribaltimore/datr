@@ -3,6 +3,8 @@ import DashboardWidget from 'components/DashboardWidget';
 import DashboardOverview from './DashboardOverview';
 
 export default function AllDashboard({likedLineData, currentUser, looksMetrics, passedLineData, matchedLineData, datedLineData}) {
+    // console.log(looksMetrics);
+    // console.log(passedLineData)
     return (
         <div className='pb-12'>
                     <div>
