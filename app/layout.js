@@ -38,7 +38,7 @@ async function getCurrentUser(userId) {
 
 
 export default async function RootLayout({ children }) {
-  let currentUser;
+  let currentUser = null;
   const session = await getSession(headers().get('cookie') ?? '').then(data => {
     if (data) {
       return data
