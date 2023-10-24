@@ -57,7 +57,7 @@ export default async function RootLayout({ children }) {
           <RegistrationProvider>
             <ReviewProvider>
               <NotifProvider>
-                <Nav disabledRegistration={currentUser && currentUser.username && currentUser.username.length ? false : true}>
+                <Nav disabledRegistration={currentUser !== null && currentUser.username && currentUser.username.length ? false : true}>
             {
              session && session.flash && session.flash.message ?
               <Flash flash={session.flash} /> : null
