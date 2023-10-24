@@ -46,17 +46,17 @@ body {
 @keyframes matched {
   0% {
     font-size: xx-small;
-    opactiy: 0%;
+    opacity: 0%;
   }
 
   50% {
   
-      opactiy: 50%;
+      opacity: 50%;
   }
 
   100% {
   
-      opactiy: 100%;
+      opacity: 100%;
   }
 }
 .icebreaker {
@@ -71,11 +71,40 @@ body {
 
   50% {
   
-      opactiy: 0%;
+      opacity: 0%;
   }
 
   100% {
   
-      opactiy: 100%;
+      opacity: 100%;
+  }
+}
+
+.disappear {
+  animation: disappear 4s linear;
+}
+
+
+@keyframes disappear {
+
+  0% {
+    opacity: 100%
+  }
+
+  25% {
+      opacity: 75%;
+  }
+
+  50% {
+
+    opacity: 50%;
+  }
+
+  75% {
+    opacity: 25%;
+  }
+
+  100% {
+    opacity: 0%;
   }
 }

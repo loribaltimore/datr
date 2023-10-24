@@ -10,8 +10,9 @@ import { ReviewProvider } from 'components/ReviewContext';
 import { RegistrationProvider } from 'components/RegistrationContext';
 import { NotifProvider } from 'components/NotifContext';
 import Footer from 'components/Footer';
-
+import database from 'models/database';
 import User from 'models/userSchema';
+
 export const metadata = {
   title: 'Datr',
   description: 'A Dating App for Pros',
@@ -29,13 +30,15 @@ async function getSession(cookie) {
   return Object.keys(session).length > 0 ? session : null;
 };
 
-async function getNotifications(userId) {
+async function getCurrentUser(userId) {
+  await database();
   const currentUser = await User.findById(userId).then(data => data).catch(err => console.log(err));
-  return currentUser.notifications;
+  return currentUser;
 };
 
 
 export default async function RootLayout({ children }) {
+  let currentUser;
   const session = await getSession(headers().get('cookie') ?? '').then(data => {
     if (data) {
       return data
@@ -43,21 +46,25 @@ export default async function RootLayout({ children }) {
       return null
     };
   }).catch(err => console.log(err));
+  if (session) {
+    currentUser = await getCurrentUser(session.userId.toString());
+  }
 
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-hidden h-screen bg-gradient-to-tr from-[#FF33E7] to-[#33FFD1]` } style={{backgroundColor: 'gray'}}>
+      <body className={`${inter.className} relative overflow-hidden h-screen bg-gradient-to-tr from-[#FF33E7] to-[#33FFD1]` } style={{backgroundColor: 'gray'}}>
         <NextAuthProvider session={session}>
           <RegistrationProvider>
             <ReviewProvider>
               <NotifProvider>
-              <Nav>
+                <Nav disabledRegistration={currentUser.username && currentUser.username.length ? false : true}>
             {
              session && session.flash && session.flash.message ?
               <Flash flash={session.flash} /> : null
             }
                   {children}
                 </Nav>
+
                 {
                   !session ?
                   <Footer /> : null
@@ -66,7 +73,6 @@ export default async function RootLayout({ children }) {
             </ReviewProvider>
             </RegistrationProvider>
         </NextAuthProvider>
-        
       </body>
     </html>
   )

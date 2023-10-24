@@ -69,16 +69,16 @@ const navigation = [
   },
 ]
 
-export default function Nav({ children }) {
+export default function Nav({ children, disabledRegistration}) {
   const { data: session } = useSession();
   const { isLoading } = useContext(ReviewContext);
   const {pReviews, setPReviews, setPChat, pChat,setPBank,pBank} = useContext(NotifContext);
     return (
-<div>
+      <div>
         <div className="relative z-50 lg:hidden" role="dialog" aria-modal="true">
         </div>
         {
-          session? 
+          session && !disabledRegistration? 
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white border border-black px-6">
       <nav className="flex flex-1 flex-col py-5">
@@ -181,7 +181,7 @@ export default function Nav({ children }) {
                     <LoadingBar /> : null
         }
 
-        <main className={`${session ? 'lg:pl-72': null} h-screen overflow-y-scroll`}>
+        <main className={`${session ? 'lg:pl-72': null}  h-screen overflow-y-scroll`}>
                     {children}
   </main>
 </div>

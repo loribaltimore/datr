@@ -1,14 +1,25 @@
 "use client"
 import { CheckCircleIcon, XMarkIcon, XCircleIcon } from '@heroicons/react/20/solid'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 
 export default function Flash({ flash }) {
     const [show, setShow] = useState(true);
     const { data: session, update } = useSession();
-
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(false);
+      update({ flash: null });
+      }, 3000)
+  });
+  
     return (
-        <>
+      <div className='py-5 absolute z-100 w-1/4 block right-40 disappear'
+        onClick={() => {
+          update({ flash: null });
+          setShow(false);
+        }}
+      >
             {
                 show && flash ?
                 flash.type === 'success'?
@@ -53,5 +64,5 @@ export default function Flash({ flash }) {
       </div>
     </div> : null
             }
-</>
+</div>
   )};

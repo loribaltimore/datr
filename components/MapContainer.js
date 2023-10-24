@@ -16,20 +16,18 @@ const gc = new GeocodingControl({country: 'us', language: 'en', responseType: 'j
 export default function MapContainer({ location, setCoord, setIsLocation }) {
     const [currentAddress, setCurrentAddress] = useState(undefined);
     gc.addEventListener('response', (event) => {
-        console.log(event.detail.featureCollection.features[0].center);
         setCoord(event.detail.featureCollection.features[0].center);
-        console.log(event.detail.featureCollection.features[0].place_name)
         setCurrentAddress(event.detail.featureCollection.features[0].place_name)
     })
     const mapContainer = useRef(null);
-    const { setEntered } = useContext(RegistrationContext);
+    const { setEntered, entered } = useContext(RegistrationContext);
 
     useEffect(() => {
         const asyncWrapper = async () => {
             setTimeout(() => {
                 const map = new Map({
                     container: mapContainer.current,
-                    apiKey: 'K34N8EzXnRm1QQbwcdOo',
+                    apiKey: process.env.MAP_API_KEY,
                     center: [-105.2705, 40.0150],
                     zoom: 5,
                     MapStyle: MapStyle.STREETS,
@@ -41,15 +39,25 @@ export default function MapContainer({ location, setCoord, setIsLocation }) {
     }, [location])
 
     return (
-        <div className="h-[20rem] space-y-3  rounded border border-black">
-            <div ref={mapContainer} className="w-full h-3/4 p-5 border border-black"></div>
+        <div className="h-[20rem] space-y-3  rounded shadow-md">
+            <div ref={mapContainer} className="w-full h-3/4 p-5 shadow-md"></div>
             <div className=" flex w-3/4 mx-auto">
                 <div className="w-1/2">
-                    <p className="text-black text-xs my-auto text-center">{currentAddress}</p>
+                    <p className="text-black text-xs my-auto text-center italic font-extralight">{currentAddress}</p>
                 </div>
-                <button className="block mx-auto border border-black text-black p-3 rounded text-sm h-full hover:ring ring-[#02F3B0] ring-inset"
-                    onClick={() => setEntered(true)}
-                >Set Address</button>
+                <button className="block mx-auto shadow-md text-black p-3 rounded text-sm h-full hover:ring ring-[#02F3B0] ring-inset"
+                    onClick={(event) => {
+                        if (!entered) {
+                            event.target.classList.add("bg-red-500");
+                            setEntered(true)
+                        } else {
+                            event.target.classList.remove("bg-red-500");
+                            setEntered(false);
+                            setCoord(undefined);
+                            setCurrentAddress(undefined);
+                        }
+                    }}
+                >{!entered? "Set Address" : "Clear"}</button>
             </div>
         </div>
     )

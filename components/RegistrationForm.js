@@ -1,8 +1,7 @@
 "use client"
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import LocationServices from 'components/LocationServices';
 import hobbyList from 'util/hobbies';
-import { Switch } from '@headlessui/react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation'
 import { RegistrationContext } from 'components/RegistrationContext';
@@ -23,7 +22,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
 
   const router = useRouter();
 
-const {data: update } = useSession();
+  const { update } = useSession();
 
   useEffect(() => {
     if (!isPersonality) {
@@ -36,7 +35,13 @@ const {data: update } = useSession();
   }, [entered]);
 
   const handleClick = async () => {
-    setIsPersonality(true);
+    if (username && name && description && hobbies.length === 6 && age >= 18 && location && files.length) {
+      setEntered(true);
+      setIsPersonality(true);
+    } else {
+      update({ flash: { type: 'error', message: 'Please fill out all fields.' } });
+      window.location.reload();
+    }
     };
 
    const createUser = async () => {
@@ -87,7 +92,7 @@ const {data: update } = useSession();
         <h1 className='block p-10 text-4xl font-extralight'>Profile Setup</h1>
 
       <div className='z-1 flex p-10 space-x-2 border-t w-11/12'>
-        <div className={`sm:space-y-16 p-5 w-1/2 mx-auto bg-white rounded border border-black ${isLocation && location ? 'hidden' : null}`}>
+        <div className={`sm:space-y-16 p-5 w-1/2 mx-auto bg-white rounded shadow-md ${isLocation && location ? 'hidden' : null}`}>
         <div>
           <h2 className="text-4xl font-extralight leading-7 text-black">Profile</h2>
           <p className="mt-1 max-w-2xl text-md leading-6 text-black font-extralight">
@@ -168,17 +173,24 @@ const {data: update } = useSession();
                 <p className="mt-3 text-md font-extralight leading-6 text-black">Write a few sentences about yourself.</p>
               </div>
                         </div>
-                        <div>
-                            <h1 className='text-lg py-5 font-extralight leading-6 text-black sm:pt-1.5'>Hobbies</h1>
+              <div>
+                <div className='flex w-full py-3 font-extralight space-x-10 leading-6 sm:pt-1.5'>
+                  <h1 className='text-lg text-black '>Hobbies</h1>
+                  <p className={`${hobbies.length < 6 ? "text-red-500" : "text-green-500"} text-sm py-1`}>{hobbies.length} chosen. Choose 6.</p>
+                </div>
                                 <div className="h-[10rem] overflow-y-scroll grid grid-cols-5 gap-4 py-6 ">
-                            
                                 {
-                                    hobbyList.map((hobby, index) => {
-                                        return <p key={index} className='text-black border border-black text-xs text-center p-1 rounded cursor-pointer hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0] transition-all duration-300 ease-in-out'
-                                            onClick={() => {
-                                                const allHobbies = hobbies;
-                                                allHobbies.push(hobby);
-                                                setHobbies(allHobbies)
+                    hobbyList.map((hobby, index) => {
+                      return <p key={index} className={` text-black shadow-md text-xs text-center p-1 rounded cursor-pointer hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0] transition-all duration-300 ease-in-out`}
+                        onClick={(event) => {
+                                              if (hobbies.length  < 6) {
+                                                setHobbies(prev => [...prev, hobby]);
+                                              event.target.classList.add('bg-[#02F3B0]');
+                          };
+                          if (hobbies.indexOf(event.target.innerText) !== -1) {
+                                  setHobbies(prev => prev.filter(hobby => hobby !== event.target.innerText))
+                                      event.target.classList.remove('bg-[#02F3B0]');
+                                }
                                             }}
                                         >{hobby}</p>
                                     })
@@ -208,7 +220,7 @@ const {data: update } = useSession();
           </div>
         </div>
 
-        <div className={` sm:space-y-16 p-5 w-1/2 mx-auto bg-white rounded border border-black ${isLocation && location ? 'hidden' : null}`}>
+        <div className={` sm:space-y-16 p-5 w-1/2 mx-auto bg-white rounded shadow-md ${isLocation && location ? 'hidden' : null}`}>
           <div className='space-y-1'>
       <h1 className=' font-extralight text-black text-4xl'>Preferences</h1>
           <div className="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
@@ -216,7 +228,7 @@ const {data: update } = useSession();
                Preferred Age
               </label>
               <div className="flex space-x-5">
-                <h1 className={'text-4xl font-extralight text-black border border-black text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
+                <h1 className={'text-4xl font-extralight text-black shadow-md text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
                   onClick={() => {
                     if (preferredAge) {
                       if (preferredAge > 18) {
@@ -237,7 +249,7 @@ const {data: update } = useSession();
                   className="block w-1/12 rounded border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-extralight text-center focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-xs sm:text-sm sm:leading-6"
                      onChange={(event) => setPreferredAge(event.target.value)}
                                 />
-                <h1 className={'text-4xl font-extralight text-black border border-black text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
+                <h1 className={'text-4xl font-extralight text-black shadow-md text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
                   onClick={() => {
                     if (preferredAge ) {
                         setPreferredAge(prev => parseInt(prev) + 1 );
@@ -253,7 +265,7 @@ const {data: update } = useSession();
                Preferred Distance
               </label>
               <div className="flex space-x-5">
-                <h1 className={'text-4xl font-extralight text-black border border-black text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
+                <h1 className={'text-4xl font-extralight text-black shadow-md text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
                   onClick={() => {
                     if (preferredDistance) {
                       if (preferredDistance > 1) {
@@ -274,7 +286,7 @@ const {data: update } = useSession();
                   className="block w-1/12 rounded border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-extralight text-center focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-xs sm:text-sm sm:leading-6"
                      onChange={(event) => setPreferredDistance(event.target.value)}
                 />
-                 <h1 className={'text-4xl font-extralight text-black border border-black text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
+                 <h1 className={'text-4xl font-extralight text-black shadow-md text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
                   onClick={() => {
                     if (preferredDistance) {
                         setPreferredDistance(prev => parseInt(prev) + 1 );
@@ -290,17 +302,57 @@ const {data: update } = useSession();
                Preferred Gender Identity
               </label>
               <div className="flex space-x-5">
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg border border-black text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
-                  onClick={() => setPreferredGender('female')}
+                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                  onClick={(event) => {
+                    if (!preferredGender || !preferredGender.length) {
+                      event.target.classList.add("bg-[#02F3B0]");
+                    setPreferredGender('female')
+                    } else {
+                      if (preferredGender === event.target.innerText.toLowerCase()) {
+                        event.target.classList.remove("bg-[#02F3B0]");
+                      setPreferredGender('');
+                      }
+                    }
+                  }}
                 >Female</button>
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg border border-black text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
-                onClick={() => setPreferredGender('male')}
+                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                 onClick={(event) => {
+                    if (!preferredGender || !preferredGender.length) {
+                      event.target.classList.add("bg-[#02F3B0]");
+                    setPreferredGender('male')
+                    } else {
+                      if (preferredGender === event.target.innerText.toLowerCase()) {
+                        event.target.classList.remove("bg-[#02F3B0]");
+                      setPreferredGender('');
+                      }
+                    }
+                  }}
                 >Male</button>
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-sm border border-black text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
-                  onClick={() => setPreferredGender('non-binary')}
+                <button className='p-2 w-2/12 rounded text-black font-extralight text-sm shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                  onClick={(event) => {
+                    if (!preferredGender || !preferredGender.length) {
+                      event.target.classList.add("bg-[#02F3B0]");
+                    setPreferredGender('non-binary')
+                    } else {
+                      if (preferredGender === event.target.innerText.toLowerCase()) {
+                        event.target.classList.remove("bg-[#02F3B0]");
+                      setPreferredGender('');
+                      }
+                    }
+                  }}
                 >Non-Binary</button>
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg border border-black text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
-                                  onClick={() => setPreferredGender('female')}
+                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                  onClick={(event) => {
+                    if (!preferredGender || !preferredGender.length) {
+                      event.target.classList.add("bg-[#02F3B0]");
+                    setPreferredGender('all')
+                    } else {
+                      if (preferredGender === event.target.innerText.toLowerCase()) {
+                        event.target.classList.remove("bg-[#02F3B0]");
+                      setPreferredGender('');
+                      }
+                    }
+                  }}
                 >All</button>
               </div>
             </div>
@@ -313,9 +365,8 @@ const {data: update } = useSession();
         </button>
         <button
                     type="submit"
-                    className="text-black inline-flex justify-center rounded border border-black text-black px-3 py-2 text-sm font-extralight shadow-sm hover:bg-[#02F3B0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#02F3B0]"
+                    className="text-black inline-flex justify-center rounded shadow-md text-black px-3 py-2 text-sm font-extralight shadow-sm hover:bg-[#02F3B0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#02F3B0]"
                         onClick={() => {
-                        setEntered(true)
                         handleClick();
                     }}
                 >
@@ -329,7 +380,3 @@ const {data: update } = useSession();
 
   )
 };
-
-// location not fetching
-// need to finish photos
-
