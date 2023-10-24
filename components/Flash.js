@@ -12,7 +12,7 @@ export default function Flash({ flash }) {
       update({ flash: null });
       }, 3000)
   });
-  
+
     return (
       <div className='py-5 absolute z-100 w-1/4 block right-40 disappear'
         onClick={() => {

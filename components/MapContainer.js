@@ -27,7 +27,7 @@ export default function MapContainer({ location, setCoord, setIsLocation }) {
             setTimeout(() => {
                 const map = new Map({
                     container: mapContainer.current,
-                    apiKey: process.env.MAP_API_KEY,
+                    apiKey: process.env.MAPTILER_API_KEY,
                     center: [-105.2705, 40.0150],
                     zoom: 5,
                     MapStyle: MapStyle.STREETS,
