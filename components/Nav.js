@@ -163,7 +163,7 @@ export default function Nav({ children, disabledRegistration}) {
               <div>
             <a key={item.name} href={item.href} className="text-gray-700 hover:text-black">
               <span className="sr-only">{item.name}</span>
-                    <item.icon className="h-3 w-3 sm:h-5 w-5" aria-hidden="true" />
+                    <item.icon className="h-3 w-3 sm:h-5 w-5" aria-hidden="true" key={item.name}/>
             </a>
               </div>
           ))}
