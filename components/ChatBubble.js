@@ -23,10 +23,10 @@ export default function ChatBubble({ message, isCurrentUser, isLast, secondToLas
     }
     return (
         <div className={`w-1/2  ${!isCurrentUser ? 'ml-auto' : null}`}>
-            <div className={`rounded p-5 ${styles[isCurrentUser]}`}>
+            <div className={`rounded md:p-5 p-2 text-sm md:text:md ${styles[isCurrentUser]}`}>
                 {message.text}
             </div>
-            <p className={`text-xs ${secondToLast ? 'text-green-400' : 'text-red-400'} text-right`}>
+            <p className={`md:text-xs text-[7px] ${secondToLast ? 'text-green-400' : 'text-red-400'} text-right`}>
                 {
                     isLast ?
                             'Delivered'

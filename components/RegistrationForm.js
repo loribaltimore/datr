@@ -89,10 +89,9 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
 
   return (
       <div>
-        <h1 className='block p-10 text-4xl font-extralight'>Profile Setup</h1>
-
-      <div className='z-1 flex p-10 space-x-2 border-t w-11/12'>
-        <div className={`sm:space-y-16 p-5 w-1/2 mx-auto bg-white rounded shadow-md ${isLocation && location ? 'hidden' : null}`}>
+        <h1 className='block p-5 lg:p-10 text-4xl font-extralight'>Profile Setup</h1>
+      <div className='z-1 space-y-2 md:space-y-0 lg:flex p-2 lg:p-10 md:space-x-2 border-t w-11/12'>
+        <div className={`sm:space-y-16 p-5 lg:w-1/2  mx-auto bg-white rounded shadow-md ${isLocation && location ? 'hidden' : null}`}>
         <div>
           <h2 className="text-4xl font-extralight leading-7 text-black">Profile</h2>
           <p className="mt-1 max-w-2xl text-md leading-6 text-black font-extralight">
@@ -181,7 +180,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                                 <div className="h-[10rem] overflow-y-scroll grid grid-cols-5 gap-4 py-6 ">
                                 {
                     hobbyList.map((hobby, index) => {
-                      return <p key={index} className={` text-black shadow-md text-xs text-center p-1 rounded cursor-pointer hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0] transition-all duration-300 ease-in-out`}
+                      return <p key={index} className={`text-black shadow-md text-[6px] sm:text-xs text-center p-1 rounded hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0] transition-all duration-300 ease-in-out`}
                         onClick={(event) => {
                                               if (hobbies.length  < 6) {
                                                 setHobbies(prev => [...prev, hobby]);
@@ -220,10 +219,10 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
           </div>
         </div>
 
-        <div className={` sm:space-y-16 p-5 w-1/2 mx-auto bg-white rounded shadow-md ${isLocation && location ? 'hidden' : null}`}>
-          <div className='space-y-1'>
+        <div className={`sm:space-y-16 p-5 lg:w-1/2 bg-white rounded shadow-md ${isLocation && location ? 'hidden' : null}`}>
+          <div className='space-y-10'>
       <h1 className=' font-extralight text-black text-4xl'>Preferences</h1>
-          <div className="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+          <div className="space-y-2 sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
               <label htmlFor="age" className="block text-lg font-extralight leading-6 text-black sm:pt-1.5">
                Preferred Age
               </label>
@@ -246,7 +245,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                   value={preferredAge}
                   placeholder={age || "28"}
                   autoComplete="given-name"
-                  className="block w-1/12 rounded border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-extralight text-center focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-xs sm:text-sm sm:leading-6"
+                  className="block w-[50px] rounded border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-extralight text-center focus:ring-2 focus:ring-inset focus:ring-black "
                      onChange={(event) => setPreferredAge(event.target.value)}
                                 />
                 <h1 className={'text-4xl font-extralight text-black shadow-md text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
@@ -260,7 +259,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                 >+</h1>
               </div>
           </div>
-          <div className="sm:grid sm:grid-cols-1 sm:items-start sm:gap-2 sm:py-2">
+          <div className="space-y-2 sm:grid sm:grid-cols-1 sm:items-start sm:gap-2 sm:py-2">
               <label htmlFor="age" className="block text-lg font-extralight leading-6 text-black sm:pt-1.5">
                Preferred Distance
               </label>
@@ -283,7 +282,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                   value={preferredDistance}
                   placeholder={10}
                   autoComplete="given-name"
-                  className="block w-1/12 rounded border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-extralight text-center focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-xs sm:text-sm sm:leading-6"
+                  className="block w-[50px] rounded border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-black font-extralight text-center focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-xs sm:text-sm sm:leading-6"
                      onChange={(event) => setPreferredDistance(event.target.value)}
                 />
                  <h1 className={'text-4xl font-extralight text-black shadow-md text-center rounded w-[2rem] hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'}
@@ -297,12 +296,12 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                 >+</h1>
               </div>
           </div>
-          <div className="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-              <label htmlFor="age" className="block text-lg font-extralight leading-6 text-black sm:pt-1.5">
+          <div className="space-y-2 sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+              <label htmlFor="age" className="block text-sm sm:text-lg font-extralight leading-6 text-black sm:pt-1.5">
                Preferred Gender Identity
               </label>
-              <div className="flex space-x-5">
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+              <div className="flex justify-evenly">
+                <button className='p-2 w-3/12 rounded text-black font-extralight text-xs md:text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
                   onClick={(event) => {
                     if (!preferredGender || !preferredGender.length) {
                       event.target.classList.add("bg-[#02F3B0]");
@@ -315,7 +314,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                     }
                   }}
                 >Female</button>
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                <button className='p-2 w-3/12 rounded text-black font-extralight text-xs md:text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
                  onClick={(event) => {
                     if (!preferredGender || !preferredGender.length) {
                       event.target.classList.add("bg-[#02F3B0]");
@@ -328,7 +327,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                     }
                   }}
                 >Male</button>
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-sm shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                <button className='p-2 w-3/12 rounded text-black font-extralight text-xs md:text-sm shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
                   onClick={(event) => {
                     if (!preferredGender || !preferredGender.length) {
                       event.target.classList.add("bg-[#02F3B0]");
@@ -341,7 +340,7 @@ export default function RegistrationForm({ isLocation, setIsLocation }) {
                     }
                   }}
                 >Non-Binary</button>
-                <button className='p-2 w-2/12 rounded text-black font-extralight text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
+                <button className='p-2 w-3/12 rounded text-black font-extralight text-xs md:text-lg shadow-md text-center hover:scale-110 cursor-pointer hover:ring ring-inset ring-[#02F3B0]'
                   onClick={(event) => {
                     if (!preferredGender || !preferredGender.length) {
                       event.target.classList.add("bg-[#02F3B0]");

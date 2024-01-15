@@ -37,12 +37,12 @@ export default function Upgrade() {
     }).then(data => console.log(data)).catch(err => console.log(err));
   }
     return (
-        <div className='space-y-5 rounded bg-white text-black w-full sticky top-36  p-8 border border border-black '>
+        <div className='space-y-5 rounded bg-white text-black w-full sticky top-36 p-4  md:p-8 border border-black '>
         <div className="flex items-center justify-between gap-x-4 w-100">
           <span className='flex w-100'>
               <h3
                   id={tier.id}
-                  className='text-4xl font-extralight leading-6 text-black'
+                  className='text-2xl md:text-4xl font-extralight leading-6 text-black'
                 >
                   Datr {tier.name}
           </h3>
@@ -53,14 +53,14 @@ export default function Upgrade() {
                   </p>
                 ) : null}
         </div>
-                  <p className="text-xl font-extralight leading-6 text-gray-600">{tier.description}</p>
-        <div className='flex space-x-10 p-5'>
-            <div className=''>
+                  <p className="text-sm  md:text-xl font-extralight leading-6 text-gray-600">{tier.description}</p>
+        <div className='space-y-4 md:space-y-0 md:flex space-x-10 md:p-5'>
+            <div className='flex space-x-5 md:block md:space-x-0 px-10 md:px-0'>
               <p className="flex items-baseline gap-x-1">
-                <span className="text-5xl font-extralight tracking-tight text-black">{tier.price}</span>
+                <span className=" text-2xl md:text-5xl font-extralight tracking-tight text-black">{tier.price}</span>
                 <span className="text-md font-light leading-6 text-black">{tier.frequency.priceSuffix}</span>
         </p>
-        <form action="/api/checkout_sessions" method="POST">
+        <form action="/api/checkout_sessions" method="POST" >
           {
             session ?
               <div>
@@ -71,17 +71,17 @@ export default function Upgrade() {
           <button
             type='submit'
                 aria-describedby={tier.id}
-                className='text-black border border-black py-3 px-5 rounded mt-8 hover:translate-110 transition-all duration-300 ease-in-out hover:ring ring-[#02F3B0] ring-inset'
+                className='text-sm md:text-md text-black border border-black py-1 px-2 md:py-3 md:px-5 rounded md:mt-8 xl:mt-8 hover:translate-110 transition-all duration-300 ease-in-out hover:ring ring-[#02F3B0] ring-inset'
               >
                 Subscribe
           </button>
           </form>
         </div>
-        <ul role="list" className="space-y-3 text-sm leading-6 text-black">
+        <ul role="list" className="space-y-3 text-sm  text-black p-0">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex gap-x-3">
                     <CheckIcon className="h-6 w-5 flex-none text-[#02F3B0]" aria-hidden="true" />
-                  <h1 className='text-xl font-extralight'>{feature}</h1>  
+                  <h1 className='text-sm md:text-xl font-extralight'>{feature}</h1>
                   </li>
                 ))}
               </ul>

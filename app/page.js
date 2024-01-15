@@ -58,7 +58,7 @@ export default function Page() {
               />
             </a>
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="">
             <a href="/auth/signin" className="text-sm font-semibold leading-6 text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
             </a>
@@ -125,7 +125,7 @@ export default function Page() {
             }}
           />
         </div>
-              <div className='border text-black shadow-xl bg-white bg-opacity-30 w-1/2 mx-auto p-5 font-extralight text-center rounded'>
+              <div className='border text-black shadow-xl bg-white bg-opacity-30 w-1/2 mx-auto p-5 font-extralight text-center rounded text-xs md:text-md lg:text-lg'>
                   For a demo, please use  Log In button above
                </div>
               <div className="mx-auto max-w-2xl  py-32 sm:py-48 lg:py-32">

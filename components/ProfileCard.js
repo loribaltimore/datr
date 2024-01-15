@@ -17,7 +17,7 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
 
     return (
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-        <div className="space-y-16 sm:col-span-4 lg:col-span-5">
+        <div className=" space-y-16 sm:col-span-4 lg:col-span-5">
           <Carousel photos={photos} />
              {
           isBank || isRev?
@@ -56,26 +56,26 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black">
   <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
 </svg>
-                <p className="ml-2 font-medium text-gray-500">{distance} Miles Away</p>
+                <p className="ml-2 font-medium text-gray-500 text-sm sm:text-md">{distance} Miles Away</p>
                 </div>
               </section>
               </div>
-              <div className='w-1/2 '>
-                <p className='text-black font-extralight text-[7rem]'>{flooredRating}</p>
+              <div className='w-1/2'>
+                <p className='text-black text-center font-extralight text-[7rem]'>{flooredRating}</p>
                 </div>
             </div>
-                    <section className="p-2">
-              <p className="text-gray-500">{description}</p>
+                    <section className="py-3">
+              <p className="text-gray-500 text-xs sm:text-lg ">{description}</p>
             </section>
-            <div className='w-100 flex space-x-12'>
-            <section className="grid grid-rows-2 grid-flow-col gap-1 w-1/2">
+            <div className='w-100 md:flex md:space-x-12 '>
+            <section className="grid grid-rows-2 grid-flow-col gap-1 w-1/2 ">
               {
                 hobbies.map((hobby, index) => {
-                  return <div key={index} className="text-black border border-black text-xs text-center p-1 rounded">{hobby}</div>
+                  return <div key={index} className="text-[10px] text-black border border-black xl:text-xs text-center p-1 rounded">{hobby}</div>
                 })
               }
               </section>
-              <button className='hover:ring ring-[#02F3B0] ring-inset text-black border border-black rounded w-1/4 h-1/4 my-auto py-2 flex text-center'
+              <button className='hover:ring ring-[#02F3B0] text-[10px] xl:text-xs  mt-2 md:m-0  w-full ring-inset text-black border border-black rounded md:w-1/4 md:h-1/4 my-auto py-2 flex text-center'
                 onClick={() => {
                   if (JSON.parse(currentUser).membership.membershipType === 'pro') {
                      setShowReviews(true);
@@ -93,7 +93,7 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 m-0">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                   </svg> :
-                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-black font-extralight w-5 h-5 m-0 ml-1">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-black font-extralight w-3 h-3 xl:w-3 xl:h-3  m-0 ml-1">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                     </svg>
                   }

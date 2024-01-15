@@ -9,13 +9,13 @@ export default function DashboardHeader({likedPercentage, looksRating, dateRatin
         { label: 'Date Rating', value: dateRating.dateRating, type: dateRating.dateTrend },
     ];
   return (
-    <div className="overflow-hidden rounded bg-white shadow sticky top-0 z-40">
+    <div className="overflow-hidden ml-5 rounded bg-white shadow sticky top-0 z-40 md:w-11/12 md:ml-14 lg:ml-0 lg:w-full">
       <h2 className="sr-only" id="profile-overview-title">
         Profile Overview
       </h2>
       <div className="bg-white p-3">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="sm:flex sm:space-x-5">
+          <div className="flex space-x-10">
             <div className="flex-shrink-0">
             <img
               src={`/api/user/photos/${photo}`}
@@ -32,7 +32,7 @@ export default function DashboardHeader({likedPercentage, looksRating, dateRatin
       </div>
       <div className="grid grid-cols-1 divide-y divide-black border-t border-black sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {stats.map((stat) => (
-          <div key={stat.label} className="px-6 py-3 text-center text-sm font-extralight">
+          <div key={stat.label} className="px-6 py-1 md:py-3 text-center text-sm font-extralight">
                 <div className='flex align-top space-x-2'>
                 <span className="text-lg text-black">{stat.value}</span>
                 <span className="text-lg text-black">{stat.label}</span>

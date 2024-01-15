@@ -41,7 +41,7 @@ export default async function Dashboard() {
         return element.dated;
     }) : null;
     return (
-        <div class="block p-5 h-[50rem] w-100 space-y-10">
+        <div class="block p-1 ml-4 md:ml-2 md:p-5 h-[50rem] w-100 space-y-10">
             <AllDashboard
                 likedLineData={likedLineData}
                 currentUser={JSON.stringify(currentUser)}

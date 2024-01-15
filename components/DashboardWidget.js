@@ -178,7 +178,7 @@ export default function DashboardWidget({ looksMetrics, likeRatio, likedLineData
 };
 
     return (
-        <div className=''>
+        <div className='md:h-[10rem] xl:h-auto'>
             {looksMetrics ? 
             <Bubble
             options={bubbleOptions}

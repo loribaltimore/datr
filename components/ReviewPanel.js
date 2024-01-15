@@ -47,7 +47,7 @@ export default function ReviewPanel({ connection, updatedReviews }) {
               </div>
             </div>
            )) :
-                          <p className='text-black text-4xl font-extralight'>No Reviews Yet</p>
+                   <p className='text-black text-lg md:text-4xl font-extralight'>No Reviews Yet</p>
                   }
         </div>
       </div>

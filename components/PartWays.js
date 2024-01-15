@@ -17,7 +17,7 @@ export default function PartWays({ activeUserId, connection, setActiveConnection
     return (
         <button
               type="button"
-              className="relative inline-flex items-center rounded px-3 py-2 text-sm  text-gray-900 shadow-sm ring-1 ring-inset ring-black hover:bg-red-500"
+              className="relative inline-flex items-center rounded px-2 py-1 xl:px-3 xl:py-2 md:text-sm  text-gray-900 shadow-sm ring-1 ring-inset ring-black hover:bg-red-500"
               onClick={async () => await partWays()}
             >
             <span>Remove</span>

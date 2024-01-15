@@ -8,7 +8,7 @@ export default function AllDashboard({likedLineData, currentUser, looksMetrics, 
     return (
         <div className='pb-12'>
                     <div>
-                    <div className='flex space-x-2'>
+                    <div className='hidden md:flex space-x-2 md:ml-8 xl:px-0'>
                 <div className="rounded bg-white text-center drop-shadow-lg w-1/2">
                 <DashboardWidget looksMetrics={(looksMetrics)} />
             </div>

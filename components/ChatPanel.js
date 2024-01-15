@@ -34,7 +34,7 @@ export default function ChatPanel({ activeUser, connection, setActiveConnections
   updatedConnection.activelyConnectedAs = activelyConnectedAs;  
   console.log(connection)
   return (
-    <div className="p-6 rounded border border-black bg-white sm:px-6 ">
+    <div className="p-2 rounded border border-black bg-white">
       <div className="px-1 py-2">
         <div className="">
           <div className="flex items-center">
@@ -63,15 +63,15 @@ export default function ChatPanel({ activeUser, connection, setActiveConnections
           </div>
         </div>
         <div>
-          <div className="ml-4 mt-4 flex flex-shrink-0 space-x-2">
+          <div className="xl:ml-4 mt-4 flex flex-shrink-0 space-x-2 justify-center">
                 <button
                     type="button"
-                    className="border border-black relative inline-flex items-center rounded bg-white px-3 py-2 text-sm  text-black shadow-sm hover:ring ring-[#02F3B0] ring-inset"
+                    className="border border-black relative inline-flex items-center rounded bg-white px-2 py-1 xl:px-3 xl:py-2 text-sm  text-black shadow-sm hover:ring ring-[#02F3B0] ring-inset"
                     onClick={async () => { await handleClick() }}
                   >
             Profile
                   </button>
-              <Link className="border border-black relative ml-3 inline-flex items-center rounded bg-white px-3 py-2 text-sm text-black shadow-sm hover:ring ring-[#02F3B0] ring-inset"
+              <Link className="border border-black relative ml-3 inline-flex items-center rounded bg-white px-2 py-1 xl:px-3 xl:py-2 text-sm text-black shadow-sm hover:ring ring-[#02F3B0] ring-inset"
                 href={`/chat/${connection._id}`}>
             <span>Chat</span>
           </Link>

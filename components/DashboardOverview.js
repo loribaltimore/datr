@@ -8,14 +8,14 @@ export default function DashboardOverview({ user, currentUser, isBank, isRev}) {
   const { name, age, description, hobbies, rating, photos } = user;
   const flooredRating = Math.round(rating.looks.total / rating.looks.count);
     return (
-        <div className=" space-y-10 border border-black m-auto mt-10 mb-10 items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded w-3/4">
+        <div className="space-y-10 border border-black m-auto mt-10 mb-10 items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded  md:w-11/12">
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
             <div className="space-y-16 sm:col-span-4 lg:col-span-5">
             <Carousel photos={photos} />
              {
           isBank || isRev?
             <button
-              className='text-black border border-black mx-auto block px-6 py-5 cursor-pointer hover:scale-110 transition-all duration-300 ease-in-out relative block rounded border border-black p-4 active:scale-100 transition-all duration-100 ease-in-out'
+              className='text-black mx-auto px-6 py-5 cursor-pointer hover:scale-110  relative block rounded border border-black p-4 active:scale-100 transition-all duration-100 ease-in-out'
               onClick={() => {
                 setShowUpgrade(false);
                 setBankConnection(null);
@@ -49,21 +49,21 @@ export default function DashboardOverview({ user, currentUser, isBank, isRev}) {
               </section>
               </div>
               <div className='w-1/2 '>
-                <p className='text-black font-extralight text-[7rem]'>{flooredRating}</p>
+                <p className='text-black font-extralight text-[7rem] text-center'>{flooredRating}</p>
                 </div>
             </div>
                     <section className="p-2">
-              <p className="text-gray-500">{description}</p>
+              <p className="text-gray-500 text-sm">{description}</p>
             </section>
-            <div className='w-100 flex space-x-12'>
+            <div className='w-100 space-y-3 md:flex md:space-x-12'>
             <section className="grid grid-rows-2 grid-flow-col gap-1 w-1/2">
               {
                 hobbies.map((hobby, index) => {
-                  return <div key={index} className="text-black border border-black text-xs text-center p-1 rounded">{hobby}</div>
+                  return <div key={index} className="text-[10px] text-black border border-black xl:text-xs text-center p-1 rounded">{hobby}</div>
                 })
               }
               </section>
-              <button className='text-black border border-black rounded w-1/4 h-1/4 my-auto py-2 flex text-center hover:bg-gray-100'
+              <button className='text-black border border-black rounded w-1/2 md:w-1/4 h-1/4 lg:w-1/3 my-auto py-2 flex text-center hover:bg-gray-100'
                 onClick={() => {
                   if (JSON.parse(currentUser).membership.membershipType === 'pro') {
                      setShowReviews(true);

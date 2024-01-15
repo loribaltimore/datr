@@ -301,9 +301,3 @@ userSchema.virtual('dontQueue', async (currentUserId) => {
 });
 
 module.exports = models.User || model("User", userSchema);
-
-
-//     double check that you can fetch more possible profiles if needed
-//         have to reseed local db with new users
-
-//have to refactor how images are handled;

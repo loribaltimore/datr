@@ -28,7 +28,7 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
         ref.current.scrollTop = ref.current.scrollHeight : null
     };
     return (
-        <div className="mt-10 w-3/4 mx-auto rounded border-black bg-white px-4 pt-2 sm:px-6 "
+        <div className="mt-10 w-10/12 ml-10 md:w-3/4 space-y-1 md:mx-auto rounded border-black bg-white px-4 pt-2 sm:px-6"
             onKeyDown={async (event) => {
             if (event.key === 'Enter'
             && input.length > 0) {
@@ -39,7 +39,7 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
             <div className='flex w-100'>
                 {
                     connection ?
-                        <div className="p-5 w-full sm:flex">
+                        <div className=" w-full md:flex space-y-2">
                             <div className="flex space-x-2 w-3/4">
                                 <div className="flex-shrink-0 ">
                         <img
@@ -50,9 +50,9 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
                         className="w-[3rem] h-[3rem] rounded-full object-cover object-center cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
                         />
             </div>
-            <div className=" mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+            <div className="  text-center mt-0  ">
               <p className="text-4xl font-extralight text-gray-900">{connection[connection.activelyConnectedWith].name}</p>
-                                </div>
+            </div>
                 </div>
                             <DateInvite connection={connection}  dateInvite={dateInvite} setDateInvite={setDateInvite}/>
           </div>
@@ -62,7 +62,7 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
 
             {
                history || messages.length ? 
-                    <div className="relative border border-black rounded mx-auto block space-y-5 p-3 h-[32rem] overflow-scroll"
+                    <div className="relative border border-black rounded mx-auto block space-y-5 p-3 h-[20rem] md:h-[32rem] overflow-scroll"
                 ref={ref} >
                         {
                             session ?
@@ -91,7 +91,7 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
                                     isCurrentUser={message.sender === userId} />
                     }) : null : null
                         }
-                        <div className='absolute bottom-2 flex w-full h-2/12 pr-5'>
+                        <div className='absolute bottom-2 flex md:w-full h-2/12 md:pr-5'>
                             <textarea className='w-full rounded text-black'
                                 value={input}
                                 onChange={(event) => {

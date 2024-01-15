@@ -36,12 +36,12 @@ export default function DateInvite({connection, dateInvite, setDateInvite }) {
     //dateInvite = 'accepted' = date accepted
     //dateInvite = 0 = date request not sent
     return (
-        <div className='flex space-x-2 font-extralight'>
-            <Link href="/chat/all" className='text-black border border-black py-2 px-3 rounded hover:ring ring-[#02F3B0] ring-inset'
+        <div className='flex space-x-2 font-extralight '>
+            <Link href="/chat/all" className='text-black border border-black px-2 py-1 md:px-3 md:py-2 text-xs md:text-sm rounded hover:ring ring-[#02F3B0] ring-inset'
             >Back</Link>
             {
                typeof dateInvite === 'number' ?
-                    <button className="hover:ring ring-[#02F3B0] ring-inset text-black border border-black px-3 py-2 rounded text-sm h-full"
+                    <button className="hover:ring ring-[#02F3B0] ring-inset text-black border border-black px-2 py-1 md:px-3 md:py-2 rounded text-xs md:text-sm h-full"
                         //then create an isShow button in chat panel.
                         //create message that says something like "if your date refuses to acknowledge that they showed, leave the date."
                         //create a message that says "never meet somebody that refuses to accept your date request in the chat"
@@ -54,17 +54,17 @@ export default function DateInvite({connection, dateInvite, setDateInvite }) {
                         >Send Date Invite</button>
                     :
                     dateInvite || isInvited?
-                        <button className=" text-black border border-black px-3 py-2 rounded text-sm h-full"
+                        <button className=" text-black border border-black px-2 py-1 md:px-3 md:py-2 rounded text-xs md:text-sm h-full"
                         >Invite Pending</button>
                         :
                         !dateInvite ?
-                            <button className="hover:ring ring-[#02F3B0] text-black border border-black px-3 py-2 rounded text-sm h-full"
+                            <button className="hover:ring ring-[#02F3B0] text-black border border-black px-2 py-1 md:px-3 md:py-2 rounded text-xs md:text-sm rounded text-sm h-full"
                                 onClick={() => sendDataInvite(1)}
                             >Accept Date
                             </button>
                             :
                             typeof dateInvite === 'string' ?
-                                <button className="text-black border border-black px-3 py-2 rounded text-sm h-full"
+                                <button className="text-black border border-black px-2 py-1 md:px-3 md:py-2 rounded text-xs md:text-sm h-full"
                                 >Date Showed</button>
                                 : null
 

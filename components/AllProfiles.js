@@ -6,11 +6,13 @@ import calculateDistance from '@/util/calculateDistance';
 import Matched from 'components/Matched';
 import Reviews from 'components/Reviews';
 import QuizResults from 'components/QuizResults';
+import {useRouter, usePathname} from 'next/navigation';
 
 export default function AllProfiles({ allMingles, setAllLikedBy, currentUser, isBank, isRev }) {
     const [counter, setCounter] = useState(0);
     const [compatibility, setCompatibility] = useState(undefined);
-
+    const path = usePathname();
+    console.log(path);
     useEffect(() => {
         // const asyncWrapper = async () => {
         //     await fetch('/api/user/mingles', {
@@ -44,7 +46,7 @@ export default function AllProfiles({ allMingles, setAllLikedBy, currentUser, is
     };
 
     return (
-        <div className="border border-black m-auto mt-28 items-center overflow-hidden bg-white px-4 pb-8 pt-14 drop-shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded w-3/4">
+        <div className={`${path === "/mingle" ? "w-10/12 ml-10" : null} ${path === "/bank" ? "md:ml-14 lg:ml-0 lg:w-full" : "md:ml-24 "} border border-black w-10/20  md:mt-28 mt-2 items-center overflow-hidden bg-white md:w-10/12 px-4 pb-8 pt-14 drop-shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded lg:w-3/4`}>
             {
                 connection ?
                     <QuizResults
