@@ -160,10 +160,10 @@ export default function Nav({ children, disabledRegistration}) {
       <div className="mx-auto h-100 max-w-7xl lg:space-y-3 lg:py-12  lg:items-center lg:justify-between lg:px-8">
         <div className="lg:flex lg:justify-center space-y-1 lg:space-x-6 lg:order-2 my-6 xl:my-0">
           {navigation.map((item) => (
-              <div>
-            <a key={item.name} href={item.href} className="text-gray-700 hover:text-black">
+              <div key={item.name}>
+            <a href={item.href} className="text-gray-700 hover:text-black" >
               <span className="sr-only">{item.name}</span>
-                    <item.icon className="h-3 w-3 sm:h-5 w-5" aria-hidden="true" key={item.name}/>
+                    <item.icon className="h-3 w-3 sm:h-5 sm:w-5" aria-hidden="true" />
             </a>
               </div>
           ))}
