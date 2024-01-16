@@ -1,8 +1,9 @@
-import { getProviders } from "next-auth/react"
+import {getProviders, signIn} from "next-auth/react"
 import SigninBtn from 'components/SigninBtn';
 import logo from '../../../public/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import SigninForm from "components/SigninForm";
 
 export default async function Signin(props) {
     const providers = await getProviders()
@@ -24,15 +25,14 @@ export default async function Signin(props) {
                 <h1 className="text-center text-3xl">Welcome back</h1>
             </div>
             {
-                Object.values(providers).map((provider, index) => (
-                 <SigninBtn providerId={provider.id} providerName={provider.name} key={provider.name} />
-            ))
+                Object.values(providers).map(function (provider, index) {
+                    if (provider.name !== "Credentials"){
+                       return <SigninBtn providerId={provider.id} providerName={provider.name} key={provider.name} />
+                    } else {
+                      return <SigninForm key={provider.name}/>
+                    }
+                })
             }
-              <div className='border text-black drop-shadow-2xl bg-white bg-opacity-30 w-1/2 mx-auto p-5 font-extralight text-center rounded'>
-                <p className="text-2xl">Demo credentials:</p>
-                <p>email: datr.demo@gmail.com</p>
-                <p>password: datrdemo123</p>
-            </div>
     </div>
     )
 };

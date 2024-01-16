@@ -39,8 +39,10 @@ export async function middleware(request) {
             if (toPass === 1) {
                 return NextResponse.next();
             } else if (toPass === 2){
+
                 return NextResponse.redirect(`${process.env.NODE_ENV === 'development' ? process.env.LOCAL_URL : process.env.NEXTAUTH_URL}/`);
             } else {
+
                 return NextResponse.redirect(`${process.env.NODE_ENV === 'development' ? process.env.LOCAL_URL : process.env.NEXTAUTH_URL}/user/registration`);
             }
         } 

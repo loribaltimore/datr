@@ -12,6 +12,8 @@ import { NotifProvider } from 'components/NotifContext';
 import Footer from 'components/Footer';
 import database from 'models/database';
 import User from 'models/userSchema';
+import {ObjectId} from "mongodb";
+
 
 export const metadata = {
   title: 'Datr',
@@ -25,7 +27,7 @@ async function getSession(cookie) {
     headers: {
       cookie,
     },
-  }).then(async data => { return data}).catch(err => console.log(err));
+  }).then(async data => {return data}).catch(err => console.log(err));
   const session = await response.json();
   return Object.keys(session).length > 0 ? session : null;
 };
@@ -43,7 +45,7 @@ export default async function RootLayout({ children }) {
     if (data) {
       return data
     } else {
-      return null
+     return null;
     };
   }).catch(err => console.log(err));
   if (session) {
