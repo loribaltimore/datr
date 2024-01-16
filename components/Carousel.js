@@ -12,7 +12,7 @@ export default function Carousel({ photos }) {
     };
 
     return (
-        <div className=" sm:w-full sm:h-full aspect-h-1 aspect-w-1 overflow-hidden rounded ">
+        <div className="h-1/4 md:w-full md:h-full md:aspect-h-1 md:aspect-w-1 overflow-hidden rounded ">
             {
                 photos ?
                     <img
@@ -20,7 +20,7 @@ export default function Carousel({ photos }) {
                         // height={500}
                         src={`/api/user/photos/${photos[counter]}`}
                         alt="Interior of light green canvas bag with padded laptop sleeve and internal organization pouch."
-                        className=" object-cover object-center cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
+                        className="w-1/2 h-1/2 mx-auto md:mx-0 md:w-full md:h-full object-cover object-center cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
                         onClick={() => nextPhoto()}
                         />
 : null

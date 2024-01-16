@@ -17,12 +17,12 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
 
     return (
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-        <div className=" space-y-16 sm:col-span-4 lg:col-span-5">
+        <div className="space-y-2 md:space-y-16 sm:col-span-4 lg:col-span-5">
           <Carousel photos={photos} />
              {
           isBank || isRev?
             <button
-              className='hover:ring ring-[#F3D202] ring-inset text-black border border-black mx-auto block px-6 py-5 cursor-pointer hover:scale-110 transition-all duration-300 ease-in-out relative block rounded border border-black p-4 active:scale-100 transition-all duration-100 ease-in-out'
+              className='hover:ring ring-[#F3D202] ring-inset text-black border border-black mx-auto block px-3 py-2 md:px-6 md:py-5 cursor-pointer hover:scale-110 transition-all duration-300 ease-in-out relative block rounded border border-black p-4 active:scale-100 transition-all duration-100 ease-in-out'
               onClick={() => {
                 setShowUpgrade(false);
                 setBankConnection(null);
