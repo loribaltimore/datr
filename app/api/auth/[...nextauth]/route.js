@@ -26,6 +26,7 @@ export const authOptions = {
           },
           async authorize(credentials, req) {
               const {username} = credentials;
+              await database();
               let user = await User.find({email: username}).then(data => data[0]).catch(err => console.log(err));
               if (user) {
                   user = { id: user._id, name: user.name, email: user.email };
