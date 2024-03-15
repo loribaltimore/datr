@@ -30,12 +30,12 @@ export default function DashboardHeader({likedPercentage, looksRating, dateRatin
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 divide-y divide-black border-t border-black sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+      <div className="grid grid-cols-1 divide-y w-full divide-black border-t border-black sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {stats.map((stat) => (
           <div key={stat.label} className="px-6 py-1 md:py-3 text-center text-sm font-extralight">
-                <div className='flex align-top space-x-2'>
+                <div className='flex align-top space-x-8'>
                 <span className="text-lg text-black">{stat.value}</span>
-                <span className="text-lg text-black">{stat.label}</span>
+                <span className="text-md text-black">{stat.label}</span>
                 <MetricsDiff type={stat.type} />
                 </div>
             </div>

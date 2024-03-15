@@ -12,9 +12,9 @@ export default function AllThumbnails({ allLikedBy, setAllLikedBy, membershipTyp
         return element.user;
     });
     return (
-        <div className='w-100 p-2'>
-                        <h1 className='text-2xl md:text-5xl font-extralight p-5 w-3/4 border-b border-white px-8 md:px-20 lg:px-0'>Admirers</h1>
-            <div className='absolute w-100 h-100 z-40 gap-4 mx-12'>
+        <div className='w-full p-2'>
+                        <h1 className='text-2xl md:text-5xl font-extralight p-5 w-full border-b border-white px-8 md:px-20 lg:px-0'>Admirers</h1>
+            <div className='absolute w-full h-100 z-40 gap-4 mx-12 lg:mx-6'>
                 
                     {
                         bankConnection || showUpgrade ?
@@ -22,17 +22,16 @@ export default function AllThumbnails({ allLikedBy, setAllLikedBy, membershipTyp
                             <div className='md:ml-11 xl:m-32'>
                                 <Upgrade /> 
                                 </div> :
-                                <div className="md:min-w-[40.5rem]">
                                     <AllProfiles allMingles={[JSON.stringify(formattedLikedBy)]}
                                         currentUser={currentUser}
                                         isBank={false}
                                         isRev={true}
                                     />
-                                </div> : null
+                                : null
 }
             </div>
             
-        <div className="md:grid grid-cols-5 grid-flow-cols md:gap-2 md:p-5 lg:w-full mt-10 ml-20 lg:ml-0">
+        <div className="md:grid md:grid-cols-4 md:grid-flow-cols md:gap-2 md:p-5 w-10/12 mt-10 ml-12 lg:ml-0">
             {
                 allLikedBy.length ?
                 allLikedBy.map((connection, index) => { 

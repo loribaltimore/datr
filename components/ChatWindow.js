@@ -91,7 +91,7 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
                                     isCurrentUser={message.sender === userId} />
                     }) : null : null
                         }
-                        <div className='sticky bottom-2 flex md:w-full h-2/12 md:pr-5'>
+                        <div className='absolute bottom-2 flex md:w-full h-2/12 md:pr-5'>
                             <textarea className='w-full rounded text-black'
                                 value={input}
                                 onChange={(event) => {

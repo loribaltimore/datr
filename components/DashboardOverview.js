@@ -8,7 +8,7 @@ export default function DashboardOverview({ user, currentUser, isBank, isRev}) {
   const { name, age, description, hobbies, rating, photos } = user;
   const flooredRating = Math.round(rating.looks.total / rating.looks.count);
     return (
-        <div className="space-y-10 border border-black m-auto mt-10 mb-10 items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded  md:w-11/12">
+        <div className="space-y-10 border  border-black m-auto mt-10 mb-10 items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded  md:w-11/12">
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
             <div className="space-y-16 sm:col-span-4 lg:col-span-5">
             <Carousel photos={photos} />
@@ -56,14 +56,14 @@ export default function DashboardOverview({ user, currentUser, isBank, isRev}) {
               <p className="text-gray-500 text-sm">{description}</p>
             </section>
             <div className='w-100 space-y-3 md:flex md:space-x-12'>
-            <section className="grid grid-rows-2 grid-flow-col gap-1 w-1/2">
+            <section className="grid grid-rows-2 grid-flow-col gap-1 w-full md:w-1/2">
               {
                 hobbies.map((hobby, index) => {
                   return <div key={index} className="text-[10px] text-black border border-black xl:text-xs text-center p-1 rounded">{hobby}</div>
                 })
               }
               </section>
-              <button className='text-black border border-black rounded w-1/2 md:w-1/4 h-1/4 lg:w-1/3 my-auto py-2 flex text-center hover:bg-gray-100'
+              <button className='text-black border border-black rounded w-full md:w-1/4 h-1/4 lg:w-1/3 my-auto py-2 flex text-center hover:bg-gray-100'
                 onClick={() => {
                   if (JSON.parse(currentUser).membership.membershipType === 'pro') {
                      setShowReviews(true);

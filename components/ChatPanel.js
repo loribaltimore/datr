@@ -34,7 +34,7 @@ export default function ChatPanel({ activeUser, connection, setActiveConnections
   updatedConnection.activelyConnectedAs = activelyConnectedAs;  
   console.log(connection)
   return (
-    <div className="p-2 rounded border border-black bg-white">
+    <div className="p-2 rounded  border border-black bg-white">
       <div className="px-1 py-2">
         <div className="">
           <div className="flex items-center">

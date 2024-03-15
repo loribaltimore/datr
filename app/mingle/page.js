@@ -21,8 +21,8 @@ async function getData() {
 export default async function page() {
   const { allMingles, currentUser } = await getData().then(data => { return data }).catch(err => console.log(err));
   return (
-    <div>
+
       <AllProfiles allMingles={JSON.stringify(allMingles)} currentUser={JSON.stringify(currentUser)}  />
-    </div>
+
   )
 };

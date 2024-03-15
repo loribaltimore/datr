@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+ import {  useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image';
 
@@ -27,7 +27,7 @@ export default function ReviewInput({ connection, setUpdatedReviews, currentMong
                   // width={500}
                   // height={500}
                   alt="profile picture"
-                  className='w-[3rem] h-[3rem] object-cover object-center rounded-full'/>
+                  className='w-[1.5rem] h-[1.5rem] md:w-[3rem] md:h-[3rem] object-cover object-center rounded-full'/>
       </div>
           <div className="min-w-0 flex-1">
               <div className='flex'>

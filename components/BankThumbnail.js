@@ -13,7 +13,7 @@ export default function BankThumbnail({ connection, membershipType, currentUserP
      });
   const averageCompatibility = Math.round(Object.values(compatibilityCalculation).reduce((a, b) => a + b) / 5);
     return (
-        <div className={` lg:min-h-full lg:ml-0 w-3/4 md:w-full  rounded flex ${membershipType === 'basic' ? 'blur-sm' : ''} xl:p-6 rounded border border-black bg-white  cursor-pointer z-30 hover:scale-105 transition-all duration-300 ease-in-out hover:ring ring-[#02F3B0] ring-inset` }
+        <div className={`lg:min-h-full lg:ml-0 w-3/4 md:w-full  rounded flex ${membershipType === 'basic' ? 'blur-sm' : ''} xl:p-6 rounded border border-black bg-white  cursor-pointer z-30 hover:scale-105 transition-all duration-300 ease-in-out hover:ring ring-[#02F3B0] ring-inset` }
         onClick={() => {
                 
                 if (membershipType === 'pro') {

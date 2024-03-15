@@ -46,7 +46,7 @@ export default function AllProfiles({ allMingles, setAllLikedBy, currentUser, is
     };
 
     return (
-        <div className={`${path === "/mingle" ? "w-10/12 ml-10" : null} ${path === "/bank" ? "md:ml-14 lg:ml-0 lg:w-full" : "md:ml-24 "} border border-black w-10/20  md:mt-28 mt-2 items-center overflow-hidden bg-white md:w-10/12 px-4 pb-8 pt-14 drop-shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded lg:w-3/4`}>
+        <div className={`${path === "/mingle" ? "w-10/12 ml-10 lg:ml-6  md:mt-28" : null} ${path === "/bank" ? "md:ml-14 lg:ml-0 w-3/4 md:mt-10 " : "md:ml-24 md:mt-10 lg:ml-0"} border border-black w-1/2  items-center overflow-hidden bg-white md:w-10/12 px-4  pb-8 pt-14 drop-shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-6 rounded lg:w-11/12`}>
             {
                 connection ?
                     <QuizResults

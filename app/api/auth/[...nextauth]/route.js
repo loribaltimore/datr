@@ -63,8 +63,10 @@ export const authOptions = {
         if (session && !session.userId){
             session.userId = currentUser.id
         };
+
       const convertedId = new mongoose.Types.ObjectId(currentUser.id);
       session = await Session.findOne({ userId: convertedId }).then(data => { return data }).catch(err => console.log(err));
+
       if (newSession) {
         session.flash = newSession.flash;
        await session.save();

@@ -79,7 +79,7 @@ export default function Nav({ children, disabledRegistration}) {
         </div>
         {
           session && !disabledRegistration? 
-            <div className="w-1/12 fixed inset-y-0 z-50  flex lg:w-72 flex-col">
+            <div className="w-1/12 fixed inset-y-0 z-50  flex lg:w-64 flex-col">
     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white border border-black px-1 md:px-4 lg:px-6">
       <nav className="flex flex-1 flex-col py-5">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -184,7 +184,7 @@ export default function Nav({ children, disabledRegistration}) {
                     <LoadingBar /> : null
         }
 
-        <main className={`${session ? 'lg:pl-72': null}  h-screen overflow-y-scroll`}>
+        <main className={`${session ? 'lg:pl-64': null}  h-screen overflow-y-scroll`}>
                     {children}
   </main>
 </div>

@@ -65,17 +65,17 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
                 </div>
             </div>
                     <section className="py-3">
-              <p className="text-gray-500 text-xs sm:text-lg ">{description}</p>
+              <p className="text-gray-500 text-xs sm:text-lg w-3/4">{description}</p>
             </section>
-            <div className='w-100 md:flex md:space-x-12 '>
-            <section className="grid grid-rows-2 grid-flow-col gap-1 w-1/2 ">
+            <div className='w-full md:flex md:space-x-12 '>
+            <section className="grid grid-rows-2 grid-flow-col gap-1 md:w-1/2 ">
               {
                 hobbies.map((hobby, index) => {
                   return <div key={index} className="text-[10px] text-black border border-black xl:text-xs text-center p-1 rounded">{hobby}</div>
                 })
               }
               </section>
-              <button className='hover:ring ring-[#02F3B0] text-[10px] xl:text-xs  mt-2 md:m-0  w-full ring-inset text-black border border-black rounded md:w-1/4 md:h-1/4 my-auto py-2 flex text-center'
+              <button className='hover:ring ring-[#02F3B0] text-md xl:text-xs  mt-2 md:m-0  w-full ring-inset text-black border border-black rounded md:w-1/4 md:h-1/4 my-auto py-2 flex text-center'
                 onClick={() => {
                   if (JSON.parse(currentUser).membership.membershipType === 'pro') {
                      setShowReviews(true);
