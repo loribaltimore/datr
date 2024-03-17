@@ -30,7 +30,7 @@ export default function Signout(){
                     try {
                         signOut()
                     } catch {
-                        console.log('error signing out');
+
                     } finally {
                         setIsLoading(false);
                     }

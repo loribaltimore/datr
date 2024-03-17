@@ -91,30 +91,26 @@ export default function ChatWindow({history, connection, dateInvite, setDateInvi
                                     isCurrentUser={message.sender === userId} />
                     }) : null : null
                         }
-                        <div className='absolute bottom-2 flex md:w-full h-2/12 md:pr-5'>
-                            <textarea className='w-full rounded text-black'
-                                value={input}
-                                onChange={(event) => {
-                                    setInput(event.target.value);
-                                }}
-                            ></textarea>
-                            <button className="hover:ring ring-[#02F3B0] ring-inset text-black border border-black w-1/4 h-100 rounded text-lg font-extralight "
-                                onClick={() => {
-                                    
-                                    if (input.length) {
-                                        sendMessage()
-                                    }
-                                }}
-                        >Send</button>
-                        </div>
                      </div> :
                     <div className='w-3/4 mx-auto rounded-lg my-auto p-3 h-[32rem]'>
                         <h1 className="text-center text-6xl text-black">No Messages</h1>
                         </div>
             }
-            <div className="sticky bottom-0 flex mt-5 w-100 bg-white space-x-5">
-                <div>
-            </div>
+            <div className='sticky bottom-2 flex w-full h-2/12 pb-3'>
+                            <textarea className='w-full rounded text-black'
+                                      value={input}
+                                      onChange={(event) => {
+                                          setInput(event.target.value);
+                                      }}
+                            ></textarea>
+                <button className="hover:ring ring-[#02F3B0] ring-inset text-black border border-black w-1/4 h-100 rounded text-lg font-extralight "
+                        onClick={() => {
+
+                            if (input.length) {
+                                sendMessage()
+                            }
+                        }}
+                >Send</button>
             </div>
             </div>
 )

@@ -21,7 +21,7 @@ const chartConfig  = {
   labels: [
     'Neuroticism',
     'Agreeableness',
-    'Extraversion',
+    'Extroversion',
     'Conscientiousness',
     'Openness'],
   datasets: [{

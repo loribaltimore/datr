@@ -60,8 +60,8 @@ export default function ProfileCard({ user, setAllLikedBy, setCounter, counter, 
                 </div>
               </section>
               </div>
-              <div className='w-1/2'>
-                <p className='text-black text-center font-extralight text-[7rem]'>{flooredRating}</p>
+              <div className='w-1/2 '>
+                <p className='text-black text-center font-extralight text-[5rem] pt-5 md:pt-0 md:text-[7rem]'>{flooredRating}</p>
                 </div>
             </div>
                     <section className="py-3">
